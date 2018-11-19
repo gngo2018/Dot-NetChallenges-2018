@@ -12,11 +12,6 @@ namespace Challenge_2
 
         public void Run()
         {
-            RunMenu();
-        }
-
-        private void RunMenu()
-        {
             bool isRunning = true;
 
             while (isRunning)
@@ -81,7 +76,6 @@ namespace Challenge_2
             }
 
             _claimRepo.AddClaimToQueue(newClaimItem);
-
         }
 
         private void SeeAllClaim()
@@ -118,12 +112,10 @@ namespace Challenge_2
             {
                 _claimRepo.GetClaimList().Dequeue();
                 Console.WriteLine("Press any key to continue");
-                Console.ReadKey();
             }
             else
             {
                 Console.WriteLine("Press any key to continue");
-                Console.ReadKey();
             }
         }
 

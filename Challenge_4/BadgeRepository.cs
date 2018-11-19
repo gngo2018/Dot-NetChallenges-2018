@@ -31,6 +31,7 @@ namespace Challenge_4
             return printedDoors;
         }
 
+        //This is where I got lost for updating the doors. Really lost for replacing only the value part of a dictionary. SOS
         public void AddDoorToBadge(Badge badge, string door)
         {
            var newDoorList = _badgeDictionary[badge.BadgeID];

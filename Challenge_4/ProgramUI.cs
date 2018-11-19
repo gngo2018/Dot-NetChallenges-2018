@@ -44,7 +44,7 @@ namespace Challenge_4
         private void CreateBadge()
         {
             Badge newBadge = new Badge();
-            Console.WriteLine("What number would you like to associate the badge with? (no # sign needed)");
+            Console.WriteLine("What number would you like to associate the badge with? (no # sign needed, numbers only)");
             newBadge.BadgeID = int.Parse(Console.ReadLine());
             newBadge.Door = AddDoor();
 
@@ -71,12 +71,12 @@ namespace Challenge_4
         private List<string> NewDoorToBadge()
         {
 
-            var newDoorList = _badgeRepo.AddDoorToBadge();
+            var newDoorList = new List<string>();
             Console.WriteLine("Would you like to add more doors to this badge?(y/n)");
             string answer = Console.ReadLine();
             while (answer.Contains("y"))
             {
-                Console.WriteLine("What doors would you like to add to the badge?");
+                Console.WriteLine("What doors would you like to add to the badge? (Please include previous doors if disired)");
                 string updateDoor = Console.ReadLine();
                 newDoorList.Add(updateDoor);
 
@@ -104,7 +104,7 @@ namespace Challenge_4
                         SeeBadgeInfo();
                         Console.WriteLine("Which badge would you like to update with the new doors? (Choose corresponding number)");
                         int response = int.Parse(Console.ReadLine());
-                        var updateBadge = _badgeRepo.GetBadgeDictionary()[response]; 
+                        var updateBadge = _badgeRepo.GetBadgeDictionary()[response - 1]; 
                         NewDoorToBadge();
                         break;
                     case 2:
@@ -129,7 +129,7 @@ namespace Challenge_4
                 i++;
                 Console.WriteLine(i + "." +
                     $"\tBadge ID: {badge.Key}\n" +
-                    $"\tDoor Access: { _badgeRepo.PrintOutDoors(badge.Value)} {_badgeRepo.PrintOutUpdateDoors(badge.Value)}\n");
+                    $"\tDoor Access: { _badgeRepo.PrintOutDoors(badge.Value)}\n");
                 
             }
         }

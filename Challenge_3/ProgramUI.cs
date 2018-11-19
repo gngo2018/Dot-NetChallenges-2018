@@ -12,11 +12,6 @@ namespace Challenge_3
 
         public void Run()
         {
-            RunMenu();
-        }
-
-        private void RunMenu()
-        {
             bool isRunning = true;
             while (isRunning)
             {
@@ -58,8 +53,7 @@ namespace Challenge_3
                     $"Event Type: {outing.EventType}\n" +
                     $"Attendance: {outing.Attendance}\n" +
                     $"Date = {outing.Date.ToShortDateString()}\n" +
-                    $"Total Cost = {outing.TotalCost}\n" +
-                    $"Cost Per Person = {outing.CostPerPerson}");
+                    $"Total Cost All Events = ${outing.TotalCost}\n");
             }
         }
 
@@ -90,7 +84,7 @@ namespace Challenge_3
                 default:
                     break;
             }
-            Console.WriteLine("How many people will be attending the event?");
+            Console.WriteLine("How many people will be attending the event? (Please use number)");
             newOuting.Attendance = int.Parse(Console.ReadLine());
             Console.WriteLine("What date are you wanting the event to be on? (MM/DD/YYYY)");
             newOuting.Date = DateTime.Parse(Console.ReadLine());
@@ -100,7 +94,6 @@ namespace Challenge_3
             newOuting.TotalCost = decimal.Parse(Console.ReadLine());
 
             _outingRepo.AddOutingToList(newOuting);
-
         }
 
         private void Calculation()

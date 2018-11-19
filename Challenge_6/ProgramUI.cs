@@ -114,7 +114,7 @@ namespace Challenge_6
                             $"\tType of Car: {car.TypeOfCar}\n" +
                             $"\tCar Brand: {car.CarBrand}\n" +
                             $"\tCar Model: {car.CarModel}\n" +
-                            $"\tAverage Highway Mileage: {car.AverageMileage}");
+                            $"\tAverage Highway Mileage: {car.AverageMileage}\n");
                     }
                     break;
                 case 2:
@@ -127,7 +127,7 @@ namespace Challenge_6
                             $"\tType of Car: {car.TypeOfCar}\n" +
                             $"\tCar Brand: {car.CarBrand}\n" +
                             $"\tCar Model: {car.CarModel}\n" +
-                            $"\tAverage Highway Mileage: {car.AverageMileage}");
+                            $"\tAverage Highway Mileage: {car.AverageMileage}\n");
                     }
                     break;
                 case 3:
@@ -140,7 +140,7 @@ namespace Challenge_6
                             $"\tType of Car: {car.TypeOfCar}\n" +
                             $"\tCar Brand: {car.CarBrand}\n" +
                             $"\tCar Model: {car.CarModel}\n" +
-                            $"\tAverage Highway Mileage: {car.AverageMileage}");
+                            $"\tAverage Highway Mileage: {car.AverageMileage}\n");
                     }
                     break;
                 default:
@@ -151,31 +151,94 @@ namespace Challenge_6
 
         private void UpdateCarList()
         {
-            DisplayCarList();
-            Console.WriteLine("Which car would you like to access? (Please choose corresponding number)");
+            Console.WriteLine("Please select a list of cars to access: \n" +
+                "1. Gas Cars\n" +
+                "2. Hybrid Cars\n" +
+                "3. Electric Cars\n");
             int input = int.Parse(Console.ReadLine());
-            var updateCar = _greenPlanRepo.GetMasterList()[input - 1];
-            Console.WriteLine("What would you like to update?\n" +
-                "1. Car Brand\n" +
-                "2. Car Model\n" +
-                "3. Average Mileage");
-            int newInput = int.Parse(Console.ReadLine());
-            switch (newInput)
+            switch (input)
             {
                 case 1:
-                    Console.WriteLine("What brand is the car?");
-                    updateCar.CarBrand = Console.ReadLine();
+                    int g = 0;
+                    Console.WriteLine("Here is the list of Gas Cars: ");
+                    foreach (GreenPlan car in _greenPlanRepo.GetGasCarList())
+                    {
+                        g++;
+                        Console.WriteLine(g + "." +
+                            $"\tType of Car: {car.TypeOfCar}\n" +
+                            $"\tCar Brand: {car.CarBrand}\n" +
+                            $"\tCar Model: {car.CarModel}\n" +
+                            $"\tAverage Highway Mileage: {car.AverageMileage}\n");
+                    }
+                    Console.WriteLine("Please select the number of car you want to update");
+                    UpdateGasCar();
                     break;
                 case 2:
-                    Console.WriteLine("What model is the car?");
-                    updateCar.CarModel = Console.ReadLine();
+                    int h = 0;
+                    Console.WriteLine("Here is the list of Hybrid Cars: ");
+                    foreach (GreenPlan car in _greenPlanRepo.GetHybridCarList())
+                    {
+                        h++;
+                        Console.WriteLine(h + "." +
+                            $"\tType of Car: {car.TypeOfCar}\n" +
+                            $"\tCar Brand: {car.CarBrand}\n" +
+                            $"\tCar Model: {car.CarModel}\n" +
+                            $"\tAverage Highway Mileage: {car.AverageMileage}\n");
+                    }
+                    Console.WriteLine("Please select the number of car you want to update");
+                    UpdateHybridCar();
                     break;
                 case 3:
-                    Console.WriteLine("What is the average mileage the car gets?");
-                    updateCar.AverageMileage = int.Parse(Console.ReadLine());
+                    int e = 0;
+                    Console.WriteLine("Here is the list of Electric Cars: ");
+                    foreach (GreenPlan car in _greenPlanRepo.GetElectricCarList())
+                    {
+                        e++;
+                        Console.WriteLine(e + "." +
+                            $"\tType of Car: {car.TypeOfCar}\n" +
+                            $"\tCar Brand: {car.CarBrand}\n" +
+                            $"\tCar Model: {car.CarModel}\n" +
+                            $"\tAverage Highway Mileage: {car.AverageMileage}\n");
+                    }
+                    Console.WriteLine("Please select the number of car you want to update");
+                    UpdateElectricCar();
                     break;
-                default:
-                    break;
+            }
+        }
+
+        private void UpdateGasCar()
+        {
+            int input = int.Parse(Console.ReadLine());
+            var updateGasCar = _greenPlanRepo.GetGasCarList()[input - 1];
+
+            if (updateGasCar.TypeOfCar == CarType.Gas)
+            {
+                _greenPlanRepo.GetGasCarList().RemoveAt(input - 1);
+                AddCarToList();
+            }
+        }
+
+        private void UpdateHybridCar()
+        {
+            int input = int.Parse(Console.ReadLine());
+            var updateHybridCar = _greenPlanRepo.GetHybridCarList()[input - 1];
+
+            if (updateHybridCar.TypeOfCar == CarType.Gas)
+            {
+                _greenPlanRepo.GetHybridCarList().RemoveAt(input - 1);
+                AddCarToList();
+            }
+        }
+
+        private void UpdateElectricCar()
+        {
+            int input = int.Parse(Console.ReadLine());
+            var updateElectricCar = _greenPlanRepo.GetElectricCarList()[input - 1];
+
+            if (updateElectricCar.TypeOfCar == CarType.Gas)
+            {
+                _greenPlanRepo.GetElectricCarList().RemoveAt(input - 1);
+                AddCarToList();
             }
         }
 
@@ -184,33 +247,19 @@ namespace Challenge_6
             DisplayCarList();
             Console.WriteLine("Which car would you like to access? (Please choose corresponding number)");
             int deleteCar = int.Parse(Console.ReadLine());
+          
             if (deleteCar == 1)
-            {
-                _greenPlanRepo.GetGasCarList().RemoveAt(deleteCar - 1);
-            }
+                {
+                    _greenPlanRepo.GetGasCarList().RemoveAt(deleteCar - 1);
+                }
             else if (deleteCar == 2)
-            {
-                _greenPlanRepo.GetHybridCarList().RemoveAt(deleteCar - 1);
-            }
+                {
+                    _greenPlanRepo.GetHybridCarList().RemoveAt(deleteCar - 1);
+                }
             else
-            {
-                _greenPlanRepo.GetElectricCarList().RemoveAt(deleteCar - 1);
-            }
-        }
-
-        private void MasterList()
-        {
-            int i = 0;
-            Console.WriteLine("Here is the master list of all cars: ");
-            foreach (GreenPlan master in _greenPlanRepo.GetMasterList())
-            {
-                i++;
-                Console.WriteLine(i + "." +
-                    $"\tType of Car: {master.TypeOfCar}\n" +
-                    $"\tCar Brand: {master.CarBrand}\n" +
-                    $"\tCar Model: {master.CarModel}\n" +
-                    $"\tAverage Highway Mileage: {master.AverageMileage}");
-            }
+                {
+                    _greenPlanRepo.GetElectricCarList().RemoveAt(deleteCar - 1);
+                }
         }
     }
 }

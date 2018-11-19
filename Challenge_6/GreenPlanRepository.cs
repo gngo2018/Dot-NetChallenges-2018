@@ -13,6 +13,8 @@ namespace Challenge_6
         List<GreenPlan> _listOfHybridCars = new List<GreenPlan>();
         List<GreenPlan> _listOfElectricCars = new List<GreenPlan>();
 
+        //Can someone please go over this with me to explain what exactly is happening. Have kind of an idea, but not functioning the way I'm wanting it to in the UI for Update
+        //Ended up not using, but still want to go over it
         public List<GreenPlan> GetMasterList()
         {
             var masterList = _masterList.Concat(_listOfGasCars).Concat(_listOfHybridCars).Concat(_listOfElectricCars).ToList();

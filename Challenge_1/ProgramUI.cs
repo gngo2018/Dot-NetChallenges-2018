@@ -10,13 +10,7 @@ namespace Challenge_1
     {
         MenuRepository _menuRepo = new MenuRepository();
         
-
         public void Run()
-        {
-            RunMenu();
-        }
-
-        private void RunMenu()
         {
             bool isRunning = true;
 
